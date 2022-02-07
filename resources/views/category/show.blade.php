@@ -17,6 +17,31 @@
     <div class="px-4 pt-5 my-5 text-center">
       <h1 class="display-4 fw-bold">{{$category->name}}</h1>
       <div class="col-lg-6 mx-auto">
+      <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach($articles as $article)
+                <tr>
+                    <td>{{$article->id}}</td>
+                    <td>{{$article->name}}</td>
+                    <td>
+                    
+                        <a class="btn btn-success" href="{{route('article.show', $article->id)}}">SHOW</a>
+                        <a class="btn btn-warning" href="{{route('article.edit', $article->id)}}">EDIT</a>
+                        <a class="btn btn-danger" href="{{route('article.deleteConfirm', $article->id)}}">DELETE</a>
+                    </td>
+                </tr>
+                @endforeach
+
+            </tbody>
+        </table>
 
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
 

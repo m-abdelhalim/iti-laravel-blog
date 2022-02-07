@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Article;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -29,10 +30,11 @@ class CategoryController extends Controller
     
     public function show($id)
     {
-        $category = Category::where('id', '=', $id)->get();
+        $category = Category::where('id', '=', $id)->get()[0];
         if($category)
         {
-        return view('category.show', ['category'=> $category[0]]);
+            $articles = Article::where('cat_id', '=', $category->id)->get();
+        return view('category.show', ['category'=> $category, 'articles'=>$articles]);
 
         }
     }
