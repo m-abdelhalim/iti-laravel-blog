@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -20,13 +21,14 @@ class ArticleController extends Controller
         $categories = Category::all();
         return view('article.add', ['categories'=>$categories ]);
     }
-    public function save(Request $request)
+    public function save(ArticleRequest $request)
     {
         // return $request;
+        $isValid = $request->validated();
         $article = new Article;
-        $article->name = $request->name;
-        $article->description = $request->description;
-        $article->cat_id = $request->category;
+        $article->name = $isValid['name'];
+        $article->description = $isValid['description'];
+        $article->cat_id = $isValid['category'];
         $article->slug= Uuid::uuid4();
         $article->save();
         return redirect()->route('article.list');
@@ -53,15 +55,17 @@ class ArticleController extends Controller
 
         }
     }
-    public function saveChanges(Request $request,$id)
+    public function saveChanges(ArticleRequest $request,$id)
     {
         // return $request->name;
+        $isValid = $request->validated();
+        // return $isValid;
         $article = Article::where('id', '=', $id)->get()[0];
         if($article)
         {
-        $article->name = $request->name;
-        $article->description = $request->description;
-        $article->cat_id = $request->category;
+        $article->name = $isValid['name'];
+        $article->description = $isValid['description'];
+        $article->cat_id = $isValid['category'];
         $article->save();
         return redirect()->route('article.list');
         }

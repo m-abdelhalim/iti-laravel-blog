@@ -29,6 +29,11 @@
                         <small id="nameHelp" class="form-text text-muted"></small>
                         <!-- <input hidden type="text" name="id" value="{{$category->id}}"> -->
                     </div>
+                    @error('name')
+                    <p id="nameHelp" class="form-text text-danger">
+                        {{ $message }}
+                    </p>
+                    @enderror
                     <div class="form-group p-5">
                         <button type="submit" class="btn btn-primary" >Edit</button>
                     </div>

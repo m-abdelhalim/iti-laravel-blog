@@ -25,27 +25,44 @@
 
                     <div class="form-group d-flex p-3">
                         <label class="w-25" for="name">Article title:</label>
-                        <input type="text" class="form-control" name="name" id="name" aria-describedby="nameHelp" placeholder="awesome title">
-                        <small id="nameHelp" class="form-text text-muted"></small>
+                        <input type="text" class="form-control" name="name" id="name" aria-describedby="nameHelp" placeholder="awesome title" value="{{old('name')}}">
+                        
 
                     </div>
+                    @error('name')
+                    <p id="nameHelp" class="form-text text-danger">
+                        {{ $message }}
+                    </p>
+                    @enderror
                     <div class="form-group d-flex p-3">
                         <label class="w-25" for="name">Category:</label>
                         
                         <select name="category" class="form-select" >
-                            <option selected>Please select category</option>
+                            <option >Please select category</option>
                             @foreach($categories as $category)
-                            <option value="{{$category->id}}">{{$category->name}}</option>
+                            <option {{$category->id == old('category') ? 'selected=selected':''}} value="{{$category->id}}">{{$category->name}}</option>
                             @endforeach
                             
                         </select>
 
                     </div>
+                    @error('category')
+                    <p id="nameHelp" class="form-text text-danger">
+                        {{ $message }}
+                    </p>
+                    @enderror
                     <div class="form-group d-flex p-3">
                         <label class="w-25" for="name">Article content:</label>
-                        <textarea name="description" id="description" cols="50" rows="10" placeholder="What's on your mind?"></textarea>
+                        <textarea name="description" id="description" cols="50" rows="10" placeholder="What's on your mind?">
+                            {{old('description')}}
+                        </textarea>
 
                     </div>
+                    @error('description')
+                    <p id="nameHelp" class="form-text text-danger">
+                        {{ $message }}
+                    </p>
+                    @enderror
                     <div class="form-group p-5">
                         <button type="submit" class="btn btn-primary">Add</button>
                     </div>

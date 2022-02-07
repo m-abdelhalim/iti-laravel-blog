@@ -23,24 +23,34 @@
                 <form method="post" action="{{route('article.saveChanges', $article->id)}}">
                     @method('PUT')
                     @csrf
-                    <div class="form-group d-flex p-3">
+                    <div class="form-group d-flex p-1">
                         <label class="w-25" for="name">Article title:</label>
                         <input type="text" class="form-control" name="name" id="name" aria-describedby="nameHelp" placeholder="awesome title" value="{{$article->name}}">
-                        <small id="nameHelp" class="form-text text-muted"></small>
+
 
                     </div>
-                    <div class="form-group d-flex p-3">
+                    @error('name')
+                    <p id="nameHelp" class="form-text text-danger">
+                        {{ $message }}
+                    </p>
+                    @enderror
+                    <div class="form-group d-flex p-1">
                         <label class="w-25" for="name">Category:</label>
-                        
-                        <select name="category" class="form-select" >
-                            <option >Please select category</option>
+
+                        <select name="category" class="form-select">
+                            <option>Please select category</option>
                             @foreach($categories as $category)
-                            <option  value="{{$category->id}}" {{$category->id == $article->cat_id ? 'selected=selected':''}}>{{$category->name}}</option>
+                            <option value="{{$category->id}}" {{$category->id == $article->cat_id ? 'selected=selected':''}}>{{$category->name}}</option>
                             @endforeach
-                            
+
                         </select>
 
                     </div>
+                    @error('category')
+                    <p id="nameHelp" class="form-text text-danger">
+                        {{ $message }}
+                    </p>
+                    @enderror
                     <div class="form-group d-flex p-3">
                         <label class="w-25" for="name">Article content:</label>
                         <textarea name="description" id="description" cols="50" rows="10" placeholder="What's on your mind?">
@@ -48,10 +58,17 @@
                         </textarea>
 
                     </div>
+                    @error('description')
+                    <p id="nameHelp" class="form-text text-danger">
+                        {{ $message }}
+                    </p>
+                    @enderror
                     <div class="form-group p-5">
-                        <button type="submit" class="btn btn-primary" >Edit</button>
+                        <button type="submit" class="btn btn-primary">Edit</button>
                     </div>
                 </form>
+                
+
             </div>
         </div>
     </main>

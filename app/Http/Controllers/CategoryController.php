@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use App\Models\Article;
 use Illuminate\Http\Request;
@@ -18,11 +19,13 @@ class CategoryController extends Controller
     {
         return view('category.add');
     }
-    public function save(Request $request)
+    public function save(CategoryRequest $request)
     {
         // return $request;
+        $isValid = $request->validated();
+        
         $category = new Category;
-        $category->name = $request->name;
+        $category->name = $isValid['name'];
         $category->save();
         return redirect()->route('category.list');
     }
@@ -47,13 +50,14 @@ class CategoryController extends Controller
 
         }
     }
-    public function saveChanges(Request $request,$id)
+    public function saveChanges(CategoryRequest $request,$id)
     {
-        // return $request->name;
+        // return $isValid['name'];
+        $isValid = $request->validated();
         $category = Category::where('id', '=', $id)->get()[0];
         if($category)
         {
-        $category->name = $request->name;
+        $category->name = $isValid['name'];
         $category->save();
         return redirect()->route('category.list');
         }

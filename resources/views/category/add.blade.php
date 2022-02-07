@@ -24,10 +24,15 @@
                     @csrf
                     <div class="form-group d-flex">
                         <label class="w-25" for="name">category name:</label>
-                        <input type="text" class="form-control" name="name" id="name" aria-describedby="nameHelp" placeholder="Enter name">
+                        <input type="text" class="form-control" name="name" id="name" aria-describedby="nameHelp" placeholder="Enter name" value="{{old('name')}}">
                         <small id="nameHelp" class="form-text text-muted"></small>
 
                     </div>
+                    @error('name')
+                    <p id="nameHelp" class="form-text text-danger">
+                        {{ $message }}
+                    </p>
+                    @enderror
                     <div class="form-group p-5">
                         <button type="submit" class="btn btn-primary" >Add</button>
                     </div>
