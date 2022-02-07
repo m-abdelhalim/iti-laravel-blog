@@ -36,7 +36,9 @@ class CategoryController extends Controller
         $category = Category::where('id', '=', $id)->get()[0];
         if($category)
         {
-            $articles = Article::where('cat_id', '=', $category->id)->get();
+            // $articles = Article::where('cat_id', '=', $category->id)->get();
+            $articles = $category->articles;
+            // return $articles;
         return view('category.show', ['category'=> $category, 'articles'=>$articles]);
 
         }

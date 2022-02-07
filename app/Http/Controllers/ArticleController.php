@@ -40,8 +40,10 @@ class ArticleController extends Controller
         $article = Article::where('id', '=', $id)->get();
         if($article)
         {
-            $category = Category::where('id', '=', $article[0]->cat_id)->get()[0];
-            return view('article.show', ['article'=> $article[0], 'category'=>$category->name]);
+            /* $category = Category::where('id', '=', $article[0]->cat_id)->get()[0]; */
+            $category = $article->category;
+            return $category;
+            /* return view('article.show', ['article'=> $article[0], 'category'=>$category->name]); */
 
         }
     }
