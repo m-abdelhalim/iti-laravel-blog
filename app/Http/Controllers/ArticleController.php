@@ -37,13 +37,13 @@ class ArticleController extends Controller
     
     public function show($id)
     {
-        $article = Article::where('id', '=', $id)->get();
+        $article = Article::where('id', '=', $id)->get()[0];
         if($article)
         {
-            /* $category = Category::where('id', '=', $article[0]->cat_id)->get()[0]; */
+            
             $category = $article->category;
-            return $category;
-            /* return view('article.show', ['article'=> $article[0], 'category'=>$category->name]); */
+            // return $category;
+            return view('article.show', ['article'=> $article, 'category'=>$category->name]);
 
         }
     }

@@ -13,7 +13,7 @@ class CategoryController extends Controller
     {
         // return 'list of categories';
         $categories = Category::all();
-        return view('category.list', ['categories'=>$categories ]);
+        return view('category.list', ['categories' => $categories]);
     }
     public function add()
     {
@@ -23,70 +23,55 @@ class CategoryController extends Controller
     {
         // return $request;
         $isValid = $request->validated();
-        
+
         $category = new Category;
         $category->name = $isValid['name'];
         $category->save();
         return redirect()->route('category.list');
     }
-    
-    
+
+
     public function show($id)
     {
         $category = Category::where('id', '=', $id)->get()[0];
-        if($category)
-        {
-            // $articles = Article::where('cat_id', '=', $category->id)->get();
+        if ($category) {
+
             $articles = $category->articles;
             // return $articles;
-        return view('category.show', ['category'=> $category, 'articles'=>$articles]);
-
+            return view('category.show', ['category' => $category, 'articles' => $articles]);
         }
     }
     public function edit($id)
     {
         $category = Category::where('id', '=', $id)->get();
-        if($category)
-        {
-            return view('category.edit', ['category'=> $category[0]]);
-
+        if ($category) {
+            return view('category.edit', ['category' => $category[0]]);
         }
     }
-    public function saveChanges(CategoryRequest $request,$id)
+    public function saveChanges(CategoryRequest $request, $id)
     {
         // return $isValid['name'];
         $isValid = $request->validated();
         $category = Category::where('id', '=', $id)->get()[0];
-        if($category)
-        {
-        $category->name = $isValid['name'];
-        $category->save();
-        return redirect()->route('category.list');
+        if ($category) {
+            $category->name = $isValid['name'];
+            $category->save();
+            return redirect()->route('category.list');
         }
     }
     public function delete($id)
     {
         $category = Category::where('id', '=', $id)->get()[0];
-        if($category)
-        {
+        if ($category) {
             $category->delete();
-
         }
         return redirect()->route('category.list');
     }
     public function deleteConfirm($id)
     {
         $category = Category::where('id', '=', $id)->get();
-        if($category)
-        {
-            return view('category.deleteConfirm', ['category'=> $category[0]]);
-
+        if ($category) {
+            return view('category.deleteConfirm', ['category' => $category[0]]);
         }
     }
-    
-    
-    
-    
-    
-    
 }
