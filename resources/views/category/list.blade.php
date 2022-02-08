@@ -40,6 +40,11 @@
 
             </tbody>
         </table>
+        <div class="d-flex justify-content-center">
+       
+       {{$categories->links()}}
+       
+       </div>
 
     </main>
 

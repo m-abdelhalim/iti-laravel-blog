@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\PaginationHelper;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use App\Models\Article;
@@ -12,7 +13,7 @@ class CategoryController extends Controller
     public function list()
     {
         // return 'list of categories';
-        $categories = Category::all();
+        $categories = Category::paginate(10);
         return view('category.list', ['categories' => $categories]);
     }
     public function add()
@@ -36,7 +37,8 @@ class CategoryController extends Controller
         $category = Category::where('id', '=', $id)->get()[0];
         if ($category) {
 
-            $articles = $category->articles;
+            $articles = PaginationHelper::paginate( $category->articles,10);
+            // $articles = Article::where('cat_id', '=', $category->id)->paginate(1);
             // return $articles;
             return view('category.show', ['category' => $category, 'articles' => $articles]);
         }

@@ -42,7 +42,11 @@
 
             </tbody>
         </table>
-
+        <div class="d-flex justify-content-center">
+       
+       {{$articles->links()}}
+       
+       </div>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
 
           <a class="btn btn-primary" href="{{route('category.list')}}">All categories</a>
