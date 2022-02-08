@@ -20,6 +20,7 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Name</th>
+                    <th scope="col">Category</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
@@ -29,6 +30,7 @@
                 <tr>
                     <td>{{$article->id}}</td>
                     <td>{{$article->name}}</td>
+                    <td>{{$article->category->name}}</td>
                     <td>
                     
                         <a class="btn btn-success" href="{{route('article.show', $article->id)}}">SHOW</a>

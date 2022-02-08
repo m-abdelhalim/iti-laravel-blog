@@ -13,7 +13,7 @@ class ArticleController extends Controller
     public function list()
     {
         // return 'list of articles';
-        $articles = Article::all();
+        $articles = Article::with('category')->get();
         return view('article.list', ['articles'=>$articles ]);
     }
     public function add()
