@@ -1,6 +1,8 @@
 <?php
 
+use App\Mail\NewUserNotification;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +15,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/email', function(){
+    Mail::to(auth()->user()->email)->send(new NewUserNotification);
+    return view('email.newUser');
 
+})->middleware('auth');
 Route::get('/test',function(){
     // dd(date_diff( now()->subYears(30)->format('Y-m-d') , '2000-01-01'));
     $d1 = Carbon::createFromFormat('Y-m-d', now()->format('Y-m-d'));
@@ -43,6 +49,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
+    
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
