@@ -14,7 +14,23 @@
 
 <body>
     <main class="container p-3">
-    <a class="btn btn-primary" href="{{route('article.add')}}">Add new</a>
+        <div class="d-flex w-50 justify-content-between">
+            <span class="h3">Welcome
+                <span class="h3 fw-bold">
+                {{auth()->user()->name}}
+                
+                </span>
+            </span>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+
+                <button class="btn btn-secondary" type="submit">
+                    {{ __('Log Out') }}
+                </button>
+            </form>
+
+            <a class="btn btn-primary" href="{{route('article.add')}}">Add new</a>
+        </div>
         <table class="table">
             <thead>
                 <tr>
@@ -32,7 +48,7 @@
                     <td>{{$article->name}}</td>
                     <td>{{$article->category->name}}</td>
                     <td>
-                    
+
                         <a class="btn btn-success" href="{{route('article.show', $article->id)}}">SHOW</a>
                         <a class="btn btn-warning" href="{{route('article.edit', $article->id)}}">EDIT</a>
                         <a class="btn btn-danger" href="{{route('article.deleteConfirm', $article->id)}}">DELETE</a>
@@ -41,15 +57,15 @@
                 @endforeach
 
             </tbody>
-            
+
         </table>
-       <div class="d-flex justify-content-center">
-       
-       {{$articles->links()}}
-       
-       </div>
+        <div class="d-flex justify-content-center">
+
+            {{$articles->links()}}
+
+        </div>
     </main>
-    
+
 
 
 

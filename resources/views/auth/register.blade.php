@@ -44,6 +44,12 @@
                                 type="password"
                                 name="password_confirmation" required />
             </div>
+            <!-- dob -->
+            <div>
+                <x-label for="dob" :value="__('Date Of Birth')" />
+
+                <x-input id="dob" class="block mt-1 w-full" type="date" name="dob" :value="old('dob')" required autofocus />
+            </div>
 
             <div class="flex items-center justify-end mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">

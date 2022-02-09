@@ -15,8 +15,23 @@
 <body>
     <main class="container p-3">
 
+        <div class="d-flex w-50 justify-content-between">
+            <span class="h3">Welcome
+                <span class="h3 fw-bold">
+                    {{auth()->user()->name}}
 
-        <a class="btn btn-primary" href="{{route('article.list')}}">All Articles</a>
+                </span>
+            </span>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+
+                <button class="btn btn-secondary" type="submit">
+                    {{ __('Log Out') }}
+                </button>
+            </form>
+
+            <a class="btn btn-primary" href="{{route('article.list')}}">All Articles</a>
+        </div>
 
         <div class="px-4 pt-5 my-5 text-center">
             <div class="col-lg-6 mx-auto">
@@ -26,7 +41,7 @@
                     <div class="form-group d-flex p-3">
                         <label class="w-25" for="name">Article title:</label>
                         <input type="text" class="form-control" name="name" id="name" aria-describedby="nameHelp" placeholder="awesome title" value="{{old('name')}}">
-                        
+
 
                     </div>
                     @error('name')
@@ -36,13 +51,13 @@
                     @enderror
                     <div class="form-group d-flex p-3">
                         <label class="w-25" for="name">Category:</label>
-                        
-                        <select name="category" class="form-select" >
-                            <option >Please select category</option>
+
+                        <select name="category" class="form-select">
+                            <option>Please select category</option>
                             @foreach($categories as $category)
                             <option {{$category->id == old('category') ? 'selected=selected':''}} value="{{$category->id}}">{{$category->name}}</option>
                             @endforeach
-                            
+
                         </select>
 
                     </div>
@@ -54,7 +69,7 @@
                     <div class="form-group d-flex p-3">
                         <label class="w-25" for="name">Article content:</label>
                         <textarea name="description" id="description" cols="50" rows="10" placeholder="What's on your mind?">
-                            {{old('description')}}
+                        {{old('description')}}
                         </textarea>
 
                     </div>

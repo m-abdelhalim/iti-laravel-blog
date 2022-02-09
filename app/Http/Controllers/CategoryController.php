@@ -36,8 +36,10 @@ class CategoryController extends Controller
     {
         $category = Category::where('id', '=', $id)->get()[0];
         if ($category) {
-
-            $articles = PaginationHelper::paginate( $category->articles,10);
+            if(auth()->user()->is_admin)
+                $articles = PaginationHelper::paginate( $category->articles,10);
+            else
+                $articles = PaginationHelper::paginate( collect(),10);
             // $articles = Article::where('cat_id', '=', $category->id)->paginate(1);
             // return $articles;
             return view('category.show', ['category' => $category, 'articles' => $articles]);

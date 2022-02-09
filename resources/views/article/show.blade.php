@@ -14,6 +14,22 @@
 
 <body>
   <main class="container p-3">
+  <div class="d-flex w-50 justify-content-between">
+  <span class="h3">Welcome
+                <span class="h3 fw-bold">
+                {{auth()->user()->name}}
+                
+                </span>
+            </span>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+
+                <button class="btn btn-secondary" type="submit">
+                    {{ __('Log Out') }}
+                </button>
+            </form>
+
+        </div>
     <div class="pt-5 pb-3 d-flex justify-content-center">
       <div class="card w-50" style="width: 18rem;">
 

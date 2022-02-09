@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
@@ -20,7 +21,14 @@ DB::listen(function($sql) {
     Log::info($sql->time);
 });
 Route::get('/test',function(){
-    $c = collect(['a','b','a','a','b']);
+    // dd(date_diff( now()->subYears(30)->format('Y-m-d') , '2000-01-01'));
+    $d1 = Carbon::createFromFormat('Y-m-d', now()->format('Y-m-d'));
+    $d2 = Carbon::createFromFormat('Y-m-d', '1990-01-01');
+    if($d1->diffInYears($d2) >= 30)
+        dd($d1->diffInYears($d2));
+    else
+        dd('< 30 ');
+    /* $c = collect(['a','b','a','a','b']);
     // $c->duplicates()->dump();
     $c->each(function($item, $key){
         var_dump($item . $key);
@@ -32,7 +40,7 @@ Route::get('/test',function(){
             var_dump($name);
             return false;
         }
-    });
+    }); */
 });
 
 Route::get('/', function () {

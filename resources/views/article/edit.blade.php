@@ -15,8 +15,23 @@
 <body>
     <main class="container p-3">
 
+    <div class="d-flex w-50 justify-content-between">
+    <span class="h3">Welcome
+                <span class="h3 fw-bold">
+                {{auth()->user()->name}}
+                
+                </span>
+            </span>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
 
-        <a class="btn btn-primary" href="{{route('article.list')}}">All Articles</a>
+                <button class="btn btn-secondary" type="submit">
+                    {{ __('Log Out') }}
+                </button>
+            </form>
+
+            <a class="btn btn-primary" href="{{route('article.list')}}">All Articles</a>
+        </div>
 
         <div class="px-4 pt-5 my-5 text-center">
             <div class="col-lg-6 mx-auto">

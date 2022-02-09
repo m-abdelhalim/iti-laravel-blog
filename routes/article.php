@@ -14,11 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/article', [ArticleController::class, 'list'])->name('article.list');
-Route::get('/article/show/{id}', [ArticleController::class, 'show'])->name('article.show');
-Route::get('/article/add', [ArticleController::class, 'add'])->name('article.add');
-Route::post('/article/save', [ArticleController::class, 'save'])->name('article.save');
-Route::get('/article/edit/{id}', [ArticleController::class, 'edit'])->name('article.edit');
-Route::put('/article/saveCahange/{id}', [ArticleController::class, 'saveChanges'])->name('article.saveChanges');
-Route::delete('/article/delete/{id}', [ArticleController::class, 'delete'])->name('article.delete');
-Route::get('/article/deleteConfirm/{id}', [ArticleController::class, 'deleteConfirm'])->name('article.deleteConfirm');
+Route::get('/article', [ArticleController::class, 'list'])->middleware(['auth' ,'is_admin'])->name('article.list');
+Route::get('/article/show/{id}', [ArticleController::class, 'show'])->middleware(['auth' ,'is_admin'])->name('article.show');
+Route::get('/article/add', [ArticleController::class, 'add'])->middleware(['auth' ,'is_admin', 'older_than_30'])->name('article.add');
+Route::post('/article/save', [ArticleController::class, 'save'])->middleware(['auth' ,'is_admin', 'older_than_30'])->name('article.save');
+Route::get('/article/edit/{id}', [ArticleController::class, 'edit'])->middleware(['auth' ,'is_admin', 'older_than_30'])->name('article.edit');
+Route::put('/article/saveCahange/{id}', [ArticleController::class, 'saveChanges'])->middleware(['auth' ,'is_admin', 'older_than_30'])->name('article.saveChanges');
+Route::delete('/article/delete/{id}', [ArticleController::class, 'delete'])->middleware(['auth' ,'is_admin', 'older_than_30'])->name('article.delete');
+Route::get('/article/deleteConfirm/{id}', [ArticleController::class, 'deleteConfirm'])->middleware(['auth' ,'is_admin', 'older_than_30'])->name('article.deleteConfirm');
