@@ -7,6 +7,8 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -38,6 +40,13 @@ class RouteServiceProvider extends ServiceProvider
         $this->configureRateLimiting();
 
         $this->routes(function () {
+
+
+            DB::listen(function ($sql) {
+                Log::info($sql->sql);
+                Log::info($sql->bindings);
+                Log::info($sql->time);
+            });
             Route::prefix('api')
                 ->middleware('api')
                 ->namespace($this->namespace)
@@ -46,7 +55,7 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
-            
+
             // Route::prefix('')->namespace($this->namespace)->group(base_path('routes/article.php'));
             // Route::prefix('')->namespace($this->namespace)->group(base_path('routes/category.php'));
             Route::middleware('web')->namespace($this->namespace)->group(base_path('routes/article.php'));

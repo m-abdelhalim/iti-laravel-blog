@@ -1,8 +1,6 @@
 <?php
 
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,11 +13,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-DB::listen(function($sql) {
-    Log::info($sql->sql);
-    Log::info($sql->bindings);
-    Log::info($sql->time);
-});
+
 Route::get('/test',function(){
     // dd(date_diff( now()->subYears(30)->format('Y-m-d') , '2000-01-01'));
     $d1 = Carbon::createFromFormat('Y-m-d', now()->format('Y-m-d'));
