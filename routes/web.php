@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Mail\NewUserNotification;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
@@ -53,3 +54,11 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+Route::get('/template', [ArticleController::class, 'list_dash']);
+
+/* 
+Route::get('/template', function(){
+    return view('dashboard.pages.data');
+})
+*/

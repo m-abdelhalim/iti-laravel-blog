@@ -10,6 +10,13 @@ use Ramsey\Uuid\Nonstandard\Uuid;
 
 class ArticleController extends Controller
 {
+    public function list_dash()
+    {
+        // return 'list of articles';
+        $articles = Article::with('category')->paginate(10);
+        return view('dashboard.pages.data', ['articles'=>$articles ]);
+    }
+
     public function list()
     {
         // return 'list of articles';
