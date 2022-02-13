@@ -35,7 +35,7 @@
 
         <div class="px-4 pt-5 my-5 text-center">
             <div class="col-lg-6 mx-auto">
-                <form method="post" action="{{route('article.save')}}">
+                <form method="post" enctype="multipart/form-data" action="{{route('article.save')}}">
                     @csrf
 
                     <div class="form-group d-flex p-3">
@@ -66,6 +66,14 @@
                         {{ $message }}
                     </p>
                     @enderror
+
+                    <div class="form-group d-flex p-3">
+                        <label class="w-25" for="name">Image:</label>
+                        <input type="file" class="form-control" name="image" id="image" aria-describedby="imageHelp" placeholder="awesome title" >
+
+
+                    </div>
+
                     <div class="form-group d-flex p-3">
                         <label class="w-25" for="name">Article content:</label>
                         <textarea name="description" id="description" cols="50" rows="10" placeholder="What's on your mind?">

@@ -37,6 +37,7 @@ class ArticleController extends Controller
         $article->description = $isValid['description'];
         $article->cat_id = $isValid['category'];
         $article->slug= Uuid::uuid4();
+        $article->addMediaFromRequest('image')->toMediaCollection();
         $article->save();
         return redirect()->route('article.list');
     }
@@ -50,7 +51,12 @@ class ArticleController extends Controller
             
             $category = $article->category;
             // return $category;
-            return view('article.show', ['article'=> $article, 'category'=>$category->name]);
+            $imgUrl = $article->getMedia()->first()->getUrl();
+            return view('article.show', [
+                'article'=> $article,
+                 'category'=>$category->name,
+                 'image'=>$imgUrl
+                ]);
 
         }
     }
