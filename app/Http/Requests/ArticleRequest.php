@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ArticleRequest extends FormRequest
@@ -28,5 +29,12 @@ class ArticleRequest extends FormRequest
             'description' => 'required',
             'category' => 'required|exists:categories,id'
         ];
+    }
+    public function withValidator(Validator $validator)
+    {
+        if ($validator->fails()) {
+            abort(response()->json([
+                'errors' => $validator->errors()], 402));
+        }
     }
 }
