@@ -52,6 +52,7 @@ class ArticleController extends Controller
             $category = $article->category;
             // return $category;
             $imgUrl = $article->getMedia()->first()->getUrl();
+            $imgUrl = explode('storage', $imgUrl, 2)[1];
             return view('article.show', [
                 'article'=> $article,
                  'category'=>$category->name,

@@ -77,7 +77,7 @@
                     <div class="form-group d-flex p-3">
                         <label class="w-25" for="name">Article content:</label>
                         <textarea name="description" id="description" cols="50" rows="10" placeholder="What's on your mind?">
-                        {{old('description')}}
+                        {{old('description') ?? ''}}
                         </textarea>
 
                     </div>
